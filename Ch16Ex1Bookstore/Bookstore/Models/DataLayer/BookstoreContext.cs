@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Models
 {
-    public class BookstoreContext : DbContext
+    public class BookstoreContext : IdentityDbContext<User>
     {
         public BookstoreContext(DbContextOptions<BookstoreContext> options)
             : base(options)
@@ -14,6 +15,8 @@ namespace Bookstore.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             // configure entities
             modelBuilder.ApplyConfiguration(new ConfigureGenres());
             modelBuilder.ApplyConfiguration(new ConfigureBooks());
